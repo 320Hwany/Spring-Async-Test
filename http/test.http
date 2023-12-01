@@ -1,0 +1,49 @@
+### 주문 로직 - 동기
+
+POST http://localhost:8080/v1/orders
+Content-Type: application/json
+
+{
+  "orders" : [
+    {
+      "orderName" : "주문명1",
+      "price" : 5000
+    },
+    {
+      "orderName" : "주문명2",
+      "price" : 6000
+    },
+    {
+      "orderName" : "주문명3",
+      "price" : 7000
+    },
+    {
+      "orderName" : "주문명4",
+      "price" : 8000
+    },
+    {
+      "orderName" : "주문명5",
+      "price" : 9000
+    },
+    {
+      "orderName" : "주문명6",
+      "price" : 10000
+    },
+    {
+      "orderName" : "주문명7",
+      "price" : 11000
+    },
+    {
+      "orderName" : "주문명8",
+      "price" : 12000
+    },
+    {
+      "orderName" : "주문명9",
+      "price" : 13000
+    },
+    {
+      "orderName" : "주문명10",
+      "price" : 14000
+    }
+  ]
+}

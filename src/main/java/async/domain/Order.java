@@ -16,7 +16,7 @@ public class Order {
     public int calculatePrice(final int discountPrice) {
         log.info("OrderName={}, Start Calculate Price", orderName);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             log.info("OrderName={}, End Calculate Price", orderName);
 
             return price - discountPrice;

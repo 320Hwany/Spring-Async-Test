@@ -15,7 +15,7 @@ public class OrderController {
         this.orderServiceV1 = orderServiceV1;
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/v1/orders")
     public int calculatePrice(@RequestBody final OrderRequest orderRequest) {
         return orderServiceV1.calculatePrice(orderRequest.orders());
     }
