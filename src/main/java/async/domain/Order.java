@@ -3,15 +3,10 @@ package async.domain;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Order {
-
-    private String orderName;
-    private int price;
-
-    public Order(final String orderName, final int price) {
-        this.orderName = orderName;
-        this.price = price;
-    }
+public record Order(
+        String orderName,
+        int price
+) {
 
     public int calculatePrice(final int discountPrice) {
         log.info("OrderName={}, Start Calculate Price", orderName);

@@ -10,22 +10,19 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class OrderServiceV1 {
+public class OrderSyncService {
 
-    public int calculatePrice(final List<Order> orders) {
+    public void calculatePrice(final List<Order> orders) {
         LocalDateTime startTime = LocalDateTime.now();
 
-        int totalPrice = 0;
         for (Order order : orders) {
             int price = order.calculatePrice(1000);
-            totalPrice += price;
+            log.info("{}의 할인 후 가격={}\n", order.orderName(), price);
         }
 
         LocalDateTime endTime = LocalDateTime.now();
         Duration duration = Duration.between(startTime, endTime);
 
         log.info("총 걸린 시간={}", duration);
-
-        return totalPrice;
     }
 }

@@ -1,6 +1,7 @@
 package async.presentation;
 
-import async.application.OrderServiceV1;
+import async.application.OrderSyncService;
+import async.application.OrderAsyncService;
 import async.dto.OrderRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,14 +10,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController {
 
-    private final OrderServiceV1 orderServiceV1;
+    private final OrderSyncService orderSyncService;
+    private final OrderAsyncService orderAsyncService;
 
-    public OrderController(final OrderServiceV1 orderServiceV1) {
-        this.orderServiceV1 = orderServiceV1;
+    public OrderController(final OrderSyncService orderSyncService, final OrderAsyncService orderAsyncService) {
+        this.orderSyncService = orderSyncService;
+        this.orderAsyncService = orderAsyncService;
     }
 
-    @PostMapping("/v1/orders")
-    public int calculatePrice(@RequestBody final OrderRequest orderRequest) {
-        return orderServiceV1.calculatePrice(orderRequest.orders());
+    @PostMapping("/orders-sync")
+    public void calculatePriceSync(@RequestBody final OrderRequest orderRequest) {
+        orderSyncService.calculatePrice(orderRequest.orders());
+    }
+
+    @PostMapping("/orders-async")
+    public void calculatePriceAsync(@RequestBody final OrderRequest orderRequest) {
+        orderAsyncService.calculatePrice(orderRequest.orders());
     }
 }
