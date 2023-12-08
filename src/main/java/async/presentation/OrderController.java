@@ -3,10 +3,15 @@ package async.presentation;
 import async.application.OrderSyncService;
 import async.application.OrderAsyncService;
 import async.dto.OrderRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
+@Slf4j
 @RestController
 public class OrderController {
 
@@ -23,8 +28,13 @@ public class OrderController {
         orderSyncService.calculatePrice(orderRequest.orders());
     }
 
-    @PostMapping("/orders-async")
-    public void calculatePriceAsync(@RequestBody final OrderRequest orderRequest) {
-        orderAsyncService.calculatePrice(orderRequest.orders());
+    @PostMapping("/orders-async/v1")
+    public void calculatePriceAsyncV1(@RequestBody final OrderRequest orderRequest) {
+        orderAsyncService.calculatePriceV1(orderRequest.orders());
+    }
+
+    @PostMapping("/orders-async/v2")
+    public void calculatePriceAsyncV2(@RequestBody final OrderRequest orderRequest) {
+        orderAsyncService.calculatePriceV2(orderRequest.orders());
     }
 }

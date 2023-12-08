@@ -19,12 +19,18 @@ public class OrderAsyncService {
         this.asyncTask = asyncTask;
     }
 
-    public void calculatePrice(final List<Order> orders) {
+    public void calculatePriceV1(final List<Order> orders) {
+        for (Order order : orders) {
+            asyncTask.calculateDiscountPriceV1(order);
+        }
+    }
+
+    public void calculatePriceV2(final List<Order> orders) {
         LocalDateTime startTime = LocalDateTime.now();
 
         CompletableFuture<Void> allOf = CompletableFuture.allOf(
                 orders.stream()
-                        .map(asyncTask::calculateDiscountPrice)
+                        .map(asyncTask::calculateDiscountPriceV2)
                         .toArray(CompletableFuture[]::new)
         );
 
@@ -34,4 +40,5 @@ public class OrderAsyncService {
             log.info("총 걸린 시간={}", duration);
         }).join();
     }
+
 }

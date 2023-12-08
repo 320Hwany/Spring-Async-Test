@@ -12,7 +12,13 @@ import java.util.concurrent.CompletableFuture;
 public class AsyncTask {
 
     @Async
-    public CompletableFuture<Void> calculateDiscountPrice(final Order order) {
+    public void calculateDiscountPriceV1(final Order order) {
+        int price = order.calculatePrice(1000);
+        log.info("{}의 할인 후 가격={}", order.orderName(), price);
+    }
+
+    @Async
+    public CompletableFuture<Void> calculateDiscountPriceV2(final Order order) {
         int price = order.calculatePrice(1000);
         log.info("{}의 할인 후 가격={}", order.orderName(), price);
 
